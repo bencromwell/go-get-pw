@@ -15,6 +15,7 @@ import (
 func Password() (string, error) {
 	fmt.Print("Enter Password: ")
 	bytePassword, err := term.ReadPassword(int(syscall.Stdin))
+	fmt.Println()
 
 	if err != nil {
 		return "", err
