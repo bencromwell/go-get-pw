@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"syscall"
@@ -61,6 +62,8 @@ func characters() ([]int, error) {
 			characterInts = append(characterInts, i)
 		}
 	}
+
+	sort.Ints(characterInts)
 
 	return characterInts, nil
 }
