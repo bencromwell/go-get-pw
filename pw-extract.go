@@ -8,7 +8,7 @@ import (
 	"strings"
 	"syscall"
 
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 
 func password() (string, error) {
 	fmt.Print("Enter Password: ")
-	bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
+	bytePassword, err := term.ReadPassword(int(syscall.Stdin))
 
 	if err != nil {
 		return "", err
