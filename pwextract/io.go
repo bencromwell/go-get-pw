@@ -1,4 +1,4 @@
-package main
+package pwextract
 
 import (
 	"bufio"
@@ -12,23 +12,7 @@ import (
 	"golang.org/x/term"
 )
 
-func main() {
-	password, _ := password()
-	characters, _ := characters()
-
-	selected, err := selectedCharactersFromPassword(password, characters)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	for index, character := range selected {
-		fmt.Printf("%d: %s\n", index, character)
-	}
-}
-
-func password() (string, error) {
+func Password() (string, error) {
 	fmt.Print("Enter Password: ")
 	bytePassword, err := term.ReadPassword(int(syscall.Stdin))
 
@@ -41,7 +25,7 @@ func password() (string, error) {
 	return strings.TrimSpace(password), nil
 }
 
-func characters() ([]int, error) {
+func Characters() ([]int, error) {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("Enter character numbers, space separated: ")
@@ -66,18 +50,4 @@ func characters() ([]int, error) {
 	sort.Ints(characterInts)
 
 	return characterInts, nil
-}
-
-func selectedCharactersFromPassword(password string, characters []int) (map[int]string, error) {
-	selected := make(map[int]string)
-
-	for _, index := range characters {
-		if len(password) > index-1 {
-			selected[index] = string([]rune(password)[index-1])
-		} else {
-			return nil, fmt.Errorf("requested character %d out of range", index)
-		}
-	}
-
-	return selected, nil
 }

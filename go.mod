@@ -1,4 +1,4 @@
-module example.com/pw-extract
+module github.com/bencromwell/go-get-pw
 
 go 1.16
 
