@@ -3,18 +3,17 @@ package pwextract
 import (
 	"bufio"
 	"fmt"
-	"os"
+	"io"
 	"sort"
 	"strconv"
 	"strings"
-	"syscall"
 
 	"golang.org/x/term"
 )
 
-func Password() (string, error) {
+func Password(fileDescriptor int) (string, error) {
 	fmt.Print("Enter Password: ")
-	bytePassword, err := term.ReadPassword(int(syscall.Stdin))
+	bytePassword, err := term.ReadPassword(fileDescriptor)
 	fmt.Println()
 
 	if err != nil {
@@ -26,24 +25,21 @@ func Password() (string, error) {
 	return strings.TrimSpace(password), nil
 }
 
-func Characters() ([]int, error) {
-	reader := bufio.NewReader(os.Stdin)
+func Characters(reader io.Reader) ([]int, error) {
+	scanner := bufio.NewScanner(reader)
 
 	fmt.Print("Enter character numbers, space separated: ")
 
-	characterString, err := reader.ReadString('\n')
+	scanner.Scan()
 
-	if err != nil {
-		return []int{}, err
-	}
+	characterString := scanner.Text()
 
 	characters := strings.Fields(characterString)
 
 	var characterInts []int
 
 	for _, character := range characters {
-		var i int
-		if i, err = strconv.Atoi(character); err == nil {
+		if i, err := strconv.Atoi(character); err == nil {
 			characterInts = append(characterInts, i)
 		}
 	}

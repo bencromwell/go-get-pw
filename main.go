@@ -2,13 +2,15 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"syscall"
 
 	"github.com/bencromwell/go-get-pw/pwextract"
 )
 
 func main() {
-	password, _ := pwextract.Password()
-	characters, _ := pwextract.Characters()
+	password, _ := pwextract.Password(int(syscall.Stdin))
+	characters, _ := pwextract.Characters(os.Stdin)
 
 	selected := pwextract.SelectedCharactersFromPassword(password, characters)
 
