@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	password, _ := pwextract.Password(int(syscall.Stdin))
+	password, _ := pwextract.Password(syscall.Stdin)
 	characters, _ := pwextract.Characters(os.Stdin)
 
 	selected := pwextract.SelectedCharactersFromPassword(password, characters)
