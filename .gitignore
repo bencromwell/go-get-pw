@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-go-get-pw
+pw-extract
 
 # Test binary, built with `go test -c`
 *.test

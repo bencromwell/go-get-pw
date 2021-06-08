@@ -1,4 +1,4 @@
-# go-get-pw
+# pw-extract
 
 ## Use case
 

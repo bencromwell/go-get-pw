@@ -5,7 +5,7 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/bencromwell/go-get-pw/pwextract"
+	"github.com/bencromwell/pw-extract/pwextract"
 )
 
 func main() {
